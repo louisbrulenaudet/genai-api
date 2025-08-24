@@ -40,7 +40,6 @@ export async function runInference({
 	if (content === null) {
 		throw new Error("Completion message content is null and cannot be parsed.");
 	}
-	console.log(content);
 
 	return content;
 }

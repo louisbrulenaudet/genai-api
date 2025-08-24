@@ -35,8 +35,6 @@ export function retryAsync<T, A extends unknown[] = unknown[]>(
 						if (raisesOnException) {
 							throw e;
 						} else {
-							// Replace with your logger if needed
-							console.error(e);
 							return undefined;
 						}
 					}

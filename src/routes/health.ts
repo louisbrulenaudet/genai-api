@@ -12,3 +12,4 @@ health.get("/", (c) => {
 });
 
 export default health;
+export type HealthRoute = typeof health;

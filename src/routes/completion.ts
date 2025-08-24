@@ -43,3 +43,4 @@ completion.post(
 );
 
 export default completion;
+export type CompletionRoute = typeof completion;

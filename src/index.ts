@@ -1,10 +1,13 @@
 // src/index.ts
 
+import { env } from "cloudflare:workers";
 import { Hono } from "hono";
+import { bearerAuth } from "hono/bearer-auth";
 import { bodyLimit } from "hono/body-limit";
 import { compress } from "hono/compress";
 import { HTTPException } from "hono/http-exception";
 import { prettyJSON } from "hono/pretty-json";
+import { secureHeaders } from "hono/secure-headers";
 import completionRoute from "./routes/completion";
 import healthRoute from "./routes/health";
 
@@ -15,7 +18,6 @@ const api = new Hono()
 api
 	.use("*", async (c, next) => {
 		const origin = c.req.header("origin");
-		// TODO: Replace this with a whitelist for production
 		if (origin) {
 			c.res.headers.set("Access-Control-Allow-Origin", origin);
 		}
@@ -30,18 +32,22 @@ api
 		}
 		c.env = {
 			...(c.env || {}),
-			...process.env,
 		};
 		await next();
 	})
 	.use(prettyJSON())
 	.use(compress());
 
-const app = new Hono<{ Bindings: Env }>().route("/api/v1", api);
+const app = new Hono<{ Bindings: Env }>();
+
+app.use(secureHeaders());
+
+app.use("/api/v1/*", bearerAuth({ token: env.BEARER_TOKEN }));
+app.route("/api/v1", api);
 
 app.use(
 	bodyLimit({
-		maxSize: 10000 * 1024, // 10mb
+		maxSize: 3000 * 1024, // 3mb
 		onError: (c) => {
 			return c.text("overflow :(", 413);
 		},

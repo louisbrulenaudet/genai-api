@@ -137,3 +137,20 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Cloudflare Wrangler build/cache
+.wrangler/
+
+# Cloudflare Worker auto-generated types
+worker-configuration.d.ts
+
+# Build output
+dist/
+
+# Local environment variable files
+.dev.vars
+.prod.vars
+
+# MacOS system files
+.DS_Store
+src/.DS_Store

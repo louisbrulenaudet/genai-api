@@ -27,7 +27,7 @@ completion.post(
 
 		const result = await runInferenceWithRetry({
 			provider: aiProvider.provider as Provider,
-			model: aiProvider.model as Model,
+			model: (body.model ?? aiProvider.model) as Model,
 			messages: [
 				{ role: "system", content: systemPrompt },
 				{ role: "user", content: body.input },

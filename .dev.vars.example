@@ -1,0 +1,2 @@
+AI_GATEWAY_BASE_URL="https://gateway.ai.cloudflare.com/v1/YOUR_ACCOUNT_ID/inference/compat"
+GOOGLE_AI_STUDIO_API_KEY="your_google_ai_studio_api_key_here"

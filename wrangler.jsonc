@@ -1,0 +1,18 @@
+{
+  "name": "genai-api",
+  "main": "src/index.ts",
+  "account_id": "0c17ffb490d11f8f4b663d52217cd19f",
+  "compatibility_date": "2025-02-04",
+  "dev": {
+    "port": 8788,
+    "inspector_port": 0
+  },
+  "observability": {
+    "enabled": true
+  },
+  "send_metrics": false,
+  "vars": {
+    "ENVIRONMENT": "dev",
+    "AI_GATEWAY_BASE_URL": "https://gateway.ai.cloudflare.com/v1/0c17ffb490d11f8f4b663d52217cd19f/genai-api/compat"
+  }
+}

@@ -21,7 +21,8 @@ export async function runInference({
 	apiKey,
 	baseURL,
 	temperature = 0,
-}: InferenceParams): Promise<string> {
+	text_format,
+}: InferenceParams & { text_format: ZodType<unknown> }): Promise<unknown> {
 	const client = new OpenAI({
 		apiKey,
 		baseURL,
@@ -38,10 +39,19 @@ export async function runInference({
 	const content = completion.choices[0].message.content;
 
 	if (content === null) {
-		throw new Error("Completion message content is null and cannot be parsed.");
+		throw new Error(
+			`Completion message content is null for model ${model} and provider ${provider}.`,
+		);
 	}
 
-	return content;
+	const parsed = text_format.safeParse({ content });
+	if (!parsed.success) {
+		throw new Error(
+			`Response validation failed: ${JSON.stringify(parsed.error)}`,
+		);
+	}
+
+	return parsed.data;
 }
 
 export const runInferenceWithRetry = retryAsync<

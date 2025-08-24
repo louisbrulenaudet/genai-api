@@ -1,4 +1,4 @@
-// src/routes/schemas.ts
+// src/routes/completion.ts
 
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
@@ -38,7 +38,7 @@ completion.post(
 			text_format: InferenceResponse,
 		});
 
-		return c.text(String(result));
+		return c.text((result as { content: string }).content);
 	},
 );
 

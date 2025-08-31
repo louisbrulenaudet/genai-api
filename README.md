@@ -17,7 +17,7 @@ The objective of this repo is to provide a very simple and easy-to-use API for d
 wrangler secret put GOOGLE_AI_STUDIO_API_KEY
 ````
 
-Wrangler will prompt you to enter your API key, which will be securely stored as a secret environment variable in your Cloudflare Worker.
+Wrangler will prompt you to enter your API key, which will be securely stored as a secret environment variable in your Cloudflare Worker. If you don't have an API key yet, you can get one from the [Google AI Studio](https://aistudio.google.com/apikey).
 
 Then, you need to put a bearer token for security reasons:
 
@@ -56,23 +56,40 @@ Content-Type: application/json
 
 The response will be plain text with the model's completion.
 
+Apple provide a helpful guide [here](https://support.apple.com/fr-fr/guide/shortcuts/apd58d46713f/ios) that you can follow to create your first shortcut using API calls. Don't forget to put the `Authorization` header with your Bearer token in the request, without it the request will fail.
+
 ### Development
 
-Start the development server:
+If you want to contribute to the development of this API or simply run it locally, you can follow these steps:
+
+1. Clone the repository:
+
+```sh
+git clone https://github.com/louisbrulenaudet/genai-api.git
+cd genai-api
+```
+
+2. Install dependencies:
+
+```sh
+make init
+```
+
+3. Set up environment variables in `.dev.vars`:
+
+```sh
+GOOGLE_AI_STUDIO_API_KEY=your_api_key
+BEARER_TOKEN=your_bearer_token
+AI_GATEWAY_BASE_URL=your_ai_gateway_base_url
+```
+
+4. Start the development server:
 
 ```sh
 make dev
 ```
 
 The API runs locally on port 8788.
-
-### Deployment
-
-Deploy to Cloudflare Workers:
-
-```sh
-make deploy
-```
 
 ## Makefile Commands
 

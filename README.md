@@ -1,4 +1,14 @@
-# genai-api
+<p align="center">
+  <img src="assets/thumbnail.png" alt="Bodyboard Thumbnail" height="150" />
+</p>
+
+# Supercharge Apple's Shortcuts using Cloudflare Worker and Gemini in a minute ☁️✨
+
+[![Biome](https://img.shields.io/badge/lint-biome-blue?logo=biome)](https://biomejs.dev/)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
+[![Known Vulnerabilities](https://snyk.io/test/github/louisbrulenaudet/bodyboard/badge.svg)](https://snyk.io/test/github/louisbrulenaudet/bodyboard)
+[![CI](https://github.com/louisbrulenaudet/bodyboard/actions/workflows/ci.yaml/badge.svg)](https://github.com/louisbrulenaudet/bodyboard/actions/workflows/ci.yaml)
+
 
 A TypeScript API for generative AI, built with [Hono](https://hono.dev/), [OpenAI](https://openai.com/), and deployed as a Cloudflare Worker.
 

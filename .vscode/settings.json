@@ -1,4 +1,11 @@
 {
   "biome.organizeImports": true,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "cSpell.words": [
+    "cloc",
+    "dotenv",
+    "dtos",
+    "Hono",
+    "Vitest"
+  ]
 }

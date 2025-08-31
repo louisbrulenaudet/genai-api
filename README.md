@@ -31,7 +31,7 @@ Once you have set up the secrets, you can deploy the API to Cloudflare Workers u
 make deploy
 ```
 
-Here you go! Your API is now deployed and ready to use. You can test it by sending requests to the Cloudflare Workers URL provided in the output.
+Here you go! Your API is now deployed and ready to use. You can test it by sending requests to the Cloudflare Workers URL provided in the output. The `completion` endpoint must be accessible pinging something like `https://your-cloudflare-worker-url.com/api/v1/completion`.
 
 ## API Usage
 

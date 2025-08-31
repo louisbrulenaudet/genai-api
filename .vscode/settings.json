@@ -5,6 +5,7 @@
     "cloc",
     "dotenv",
     "dtos",
+    "genai",
     "Hono",
     "Vitest"
   ]

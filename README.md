@@ -7,42 +7,54 @@
 [![Biome](https://img.shields.io/badge/lint-biome-blue?logo=biome)](https://biomejs.dev/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
 [![Known Vulnerabilities](https://snyk.io/test/github/louisbrulenaudet/genai-api/badge.svg)](https://snyk.io/test/github/louisbrulenaudet/genai-api)
+[![Zod](https://img.shields.io/badge/validation-zod-blueviolet?logo=zod)](https://github.com/colinhacks/zod)
 
-A TypeScript API for generative AI, built with [Hono](https://hono.dev/), [OpenAI](https://openai.com/), and deployed as a Cloudflare Worker.
+This TypeScript API built with [Hono](https://hono.dev/), [OpenAI](https://openai.com/), and deployed as a Cloudflare Worker aims to boost the performance of Apple's Shortcuts by providing a seamless integration with generative AI capabilities, allowing users to create more powerful and intelligent shortcuts and leveraging the full potential of information extraction provided by the Apple ecosystem.
 
-## Features
+The objective of this repo is to provide a very simple and easy-to-use API for developers to integrate generative AI capabilities into their shortcuts in a minute. You just have to download this repository, slightly edit the configuration files, notably the `wrangler.jsonc` file, and run `make init` (eventually `make update`), then:
 
-- Fast, lightweight API using Hono
-- OpenAI integration for inference/completion
-- Zod-based validation
-- Cloudflare Worker deployment via Wrangler
-- Environment-based configuration
-- Makefile-driven development workflow
+```bash
+wrangler secret put GOOGLE_AI_STUDIO_API_KEY
+````
 
-## Getting Started
+Wrangler will prompt you to enter your API key, which will be securely stored as a secret environment variable in your Cloudflare Worker.
 
-### Prerequisites
+Then, you need to put a bearer token for security reasons:
 
-- [pnpm](https://pnpm.io/)
-- Node.js >= 18
-- Cloudflare account (for deployment)
-
-### Installation
-
-```sh
-make init
+```bash
+wrangler secret put BEARER_TOKEN
 ```
 
-### Environment Variables
+Once you have set up the secrets, you can deploy the API to Cloudflare Workers using:
 
-Copy and edit the example files:
-
-```sh
-cp .dev.vars.example .dev.vars
-cp .prod.vars.example .prod.vars
+```bash
+make deploy
 ```
 
-Edit `.dev.vars` and `.prod.vars` to set your API keys and configuration.
+Here you go! Your API is now deployed and ready to use. You can test it by sending requests to the Cloudflare Workers URL provided in the output.
+
+## API Usage
+
+Send a POST request to `/completion` with a JSON body:
+
+```http
+POST /completion
+Content-Type: application/json
+
+{
+  "input": "What is the capital of France?",
+  "system": "You are a helpful assistant.",
+  "temperature": 0.7,
+  "model": "gemini-2.0-flash"
+}
+```
+
+- `input` (string, required): The user prompt.
+- `system` (string, optional): System prompt for context.
+- `temperature` (number, optional): Sampling temperature (default 0.2).
+- `model` (string, optional): Model name (e.g., "gemini-2.0-flash").
+
+The response will be plain text with the model's completion.
 
 ### Development
 
@@ -75,10 +87,5 @@ make deploy
 | types     | Generate TypeScript worker types            |
 | cloc      | Count lines of code in src/                 |
 
-## License
-
-See [LICENSE](LICENSE).
-
-## Contributing
-
-Pull requests and issues are welcome!
+## Feedback
+If you have any feedback, please reach out at [louisbrulenaudet@icloud.com](mailto:louisbrulenaudet@icloud.com).

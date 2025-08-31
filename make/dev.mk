@@ -6,6 +6,10 @@ update: ## Update dependencies to their latest versions
 	@echo "🔄 Updating dependencies..."
 	pnpm update
 
+check: ## Check the codebase for issues
+	@echo "🔍 Checking codebase..."
+	pnpm run check
+
 dev: ## Run development server with hot reloading and local database
 	@echo "💻 Starting development server..."
 	pnpm run dev

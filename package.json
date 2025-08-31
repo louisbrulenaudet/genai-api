@@ -1,12 +1,13 @@
 {
   "name": "genai-api",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",
   "scripts": {
     "format": "biome format --write src",
     "lint": "biome check --write src",
     "test": "vitest",
+    "check": "biome check src",
     "dev": "wrangler dev src/index.ts",
     "deploy": "wrangler deploy --minify src/index.ts",
     "types": "wrangler types"
@@ -14,18 +15,18 @@
   "dependencies": {
     "@hono/zod-validator": "^0.7.2",
     "dotenv": "^17.2.1",
-    "hono": "^4.9.4",
-    "openai": "^5.15.0",
+    "hono": "^4.9.5",
+    "openai": "^5.16.0",
     "zod": "^3.25.76"
   },
   "devDependencies": {
     "@biomejs/biome": "2.1.4",
-    "@cloudflare/vitest-pool-workers": "^0.8.66",
+    "@cloudflare/vitest-pool-workers": "^0.8.68",
     "@types/node": "^24.3.0",
     "cloc": "2.6.0-cloc",
     "typescript": "5.8.3",
     "vitest": "~3.2.4",
-    "wrangler": "^4.32.0"
+    "wrangler": "^4.33.1"
   },
   "packageManager": "pnpm@10.15.0",
   "engines": {

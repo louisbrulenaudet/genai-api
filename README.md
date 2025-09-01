@@ -2,7 +2,7 @@
   <img src="assets/thumbnail.png" alt="Bodyboard Thumbnail" height="150" />
 </p>
 
-# Supercharge Apple's Shortcuts using Cloudflare Worker and Gemini in a minute ☁️✨
+# Supercharge Apple's Shortcuts using Cloudflare Worker and Gemini within minutes ☁️✨
 
 [![Biome](https://img.shields.io/badge/lint-biome-blue?logo=biome)](https://biomejs.dev/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)

@@ -35,11 +35,17 @@ Here you go! Your API is now deployed and ready to use. You can test it by sendi
 
 ## API Usage
 
+### Providers & Models
+
+- **Providers:** `google-ai-studio`
+- **Models:** `gemini-2.5-flash`, `gemini-2.5-flash-lite`, `gemini-2.0-flash`, `gemini-2.0-flash-lite`
+
 Send a POST request to `/completion` with a JSON body:
 
 ```http
 POST /completion
 Content-Type: application/json
+X-API-Key: your_provider_specific_api_key
 
 {
   "input": "What is the capital of France?",
@@ -56,7 +62,13 @@ Content-Type: application/json
 
 The response will be plain text with the model's completion.
 
-Apple provide a helpful guide [here](https://support.apple.com/fr-fr/guide/shortcuts/apd58d46713f/ios) that you can follow to create your first shortcut using API calls. Don't forget to put the `Authorization` header with your Bearer token in the request, without it the request will fail.
+Apple provide a helpful guide [here](https://support.apple.com/fr-fr/guide/shortcuts/apd58d46713f/ios) that you can follow to create your first shortcut using API calls.
+
+**Authentication:**
+- Always include the `Authorization` header with your Bearer token.
+- You may also send an `X-API-Key` header to use a provider-specific key for requests, without needing to rotate secrets in environment variables.
+
+Without the `Authorization` header, the request will fail.
 
 ### Development
 

@@ -36,6 +36,7 @@ completion.post(
 			baseURL: aiProvider.baseURL ?? "",
 			temperature: body.temperature ?? 0.2,
 			text_format: InferenceResponse,
+			reasoning_effort: body.reasoning_effort,
 		});
 
 		return c.text((result as { content: string }).content);

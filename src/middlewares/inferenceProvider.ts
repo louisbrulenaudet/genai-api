@@ -2,12 +2,7 @@
 
 import type { Context } from "hono";
 import { createMiddleware } from "hono/factory";
-
-type InferenceProviderBody = {
-	provider: string;
-	model: string;
-	[key: string]: unknown;
-};
+import { InferenceRequest } from "../dtos/inference";
 
 /**
  * Middleware to validate and extract inference provider configuration from the request body.
@@ -26,26 +21,41 @@ type InferenceProviderBody = {
  * @returns A response with an error message and status code if validation fails, otherwise proceeds to the next middleware.
  */
 export const inferenceProvider = createMiddleware(async (c: Context, next) => {
-	let body: InferenceProviderBody;
+	let rawBody: unknown;
 	try {
-		body = await c.req.json();
+		rawBody = await c.req.json();
 	} catch {
 		return c.json({ error: "Invalid or missing JSON body" }, 400);
 	}
 
-	const provider = body?.provider ?? "google-ai-studio";
-	const model = body?.model ?? "gemini-2.0-flash";
+	// Parse and validate the request body using Zod schema with defaults
+	const parseResult = InferenceRequest.safeParse(rawBody);
+	if (!parseResult.success) {
+		return c.json(
+			{
+				error: "Invalid request body",
+				details: parseResult.error.issues,
+			},
+			400,
+		);
+	}
+
+	const { provider, model } = parseResult.data;
 
 	// Convert provider to ENV VAR format, e.g., google_ai_studio -> GOOGLE_AI_STUDIO_API_KEY
 	const envVarName = `${`${provider}`.toUpperCase().replace(/[^A-Z0-9]/g, "_")}_API_KEY`;
-	const apiKey = c.env[envVarName];
+	// Prefer X-API-Key header if present, else fallback to env variable
+	const headerApiKey = c.req.header("X-API-Key");
+	const apiKey =
+		headerApiKey && headerApiKey.trim() !== ""
+			? headerApiKey
+			: c.env[envVarName];
 
 	if (!apiKey) {
 		return c.json(
 			{
 				error: `API key not found for provider: ${provider}`,
-				details: `Missing environment variable: ${envVarName}`,
-				supportedProviders: ["google-ai-studio"],
+				details: `Missing environment variable: ${envVarName} and no X-API-Key header provided.`,
 			},
 			500,
 		);

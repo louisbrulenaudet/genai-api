@@ -1,8 +1,11 @@
 // src/services/inferenceService.ts
+/** biome-ignore-all lint/suspicious/noExplicitAny: No need for explicit any */
 
 import OpenAI from "openai";
+
 import type { ZodType } from "zod";
 import type { Model, Provider } from "../enums/inference";
+import { ReasoningEffort } from "../enums/inference";
 import { retryAsync } from "../utils/retry";
 
 interface InferenceParams {
@@ -12,6 +15,7 @@ interface InferenceParams {
 	apiKey: string;
 	baseURL: string;
 	temperature?: number;
+	reasoning_effort?: ReasoningEffort;
 }
 
 export async function runInference({
@@ -21,6 +25,7 @@ export async function runInference({
 	apiKey,
 	baseURL,
 	temperature = 0,
+	reasoning_effort = ReasoningEffort.None,
 	text_format,
 }: InferenceParams & { text_format: ZodType<unknown> }): Promise<unknown> {
 	const client = new OpenAI({
@@ -29,13 +34,15 @@ export async function runInference({
 		timeout: 120000, // 120 seconds timeout for API requests
 	});
 
-	const completion = await client.chat.completions.create({
+	const payload = {
 		model: `${provider}/${model}`,
-		messages: messages,
+		messages,
 		temperature,
-		response_format: { type: "text" },
-	});
+		response_format: { type: "text" as const },
+		reasoning_effort: reasoning_effort as any,
+	};
 
+	const completion = await client.chat.completions.create(payload);
 	const content = completion.choices[0].message.content;
 
 	if (content === null) {

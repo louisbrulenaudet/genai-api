@@ -8,3 +8,10 @@ export enum Model {
 	Gemini25Flash = "gemini-2.5-flash",
 	Gemini2Flash = "gemini-2.0-flash",
 }
+
+export enum ReasoningEffort {
+	None = "none",
+	Low = "low",
+	Medium = "medium",
+	High = "high",
+}

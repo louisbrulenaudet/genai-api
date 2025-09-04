@@ -10,13 +10,13 @@ importers:
     dependencies:
       '@hono/zod-validator':
         specifier: ^0.7.2
-        version: 0.7.2(hono@4.9.5)(zod@3.25.76)
+        version: 0.7.2(hono@4.9.6)(zod@3.25.76)
       dotenv:
         specifier: ^17.2.1
         version: 17.2.1
       hono:
-        specifier: ^4.9.5
-        version: 4.9.5
+        specifier: ^4.9.6
+        version: 4.9.6
       openai:
         specifier: ^5.16.0
         version: 5.16.0(ws@8.18.0)(zod@3.25.76)
@@ -877,8 +877,8 @@ packages:
   glob-to-regexp@0.4.1:
     resolution: {integrity: sha512-lkX1HJXwyMcprw/5YUZc2s7DrpAiHB21/V+E1rHUrVNokkvB6bqMzT0VfV6/86ZNabt1k14YOIaT7nDvOX3Iiw==}
 
-  hono@4.9.5:
-    resolution: {integrity: sha512-aLAVl5/67ifNnoFVxnhR89dpmSLsgwBprw/PT671ASwUpJqmd7Ne8KPTQo37DbRZfgpHaHeZ4bPVUvbOkeedMw==}
+  hono@4.9.6:
+    resolution: {integrity: sha512-doVjXhSFvYZ7y0dNokjwwSahcrAfdz+/BCLvAMa/vHLzjj8+CFyV5xteThGUsKdkaasgN+gF2mUxao+SGLpUeA==}
     engines: {node: '>=16.9.0'}
 
   is-arrayish@0.3.2:
@@ -1393,9 +1393,9 @@ snapshots:
   '@esbuild/win32-x64@0.25.9':
     optional: true
 
-  '@hono/zod-validator@0.7.2(hono@4.9.5)(zod@3.25.76)':
+  '@hono/zod-validator@0.7.2(hono@4.9.6)(zod@3.25.76)':
     dependencies:
-      hono: 4.9.5
+      hono: 4.9.6
       zod: 3.25.76
 
   '@img/sharp-darwin-arm64@0.33.5':
@@ -1753,7 +1753,7 @@ snapshots:
 
   glob-to-regexp@0.4.1: {}
 
-  hono@4.9.5: {}
+  hono@4.9.6: {}
 
   is-arrayish@0.3.2: {}
 

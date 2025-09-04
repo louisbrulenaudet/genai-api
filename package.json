@@ -15,7 +15,7 @@
   "dependencies": {
     "@hono/zod-validator": "^0.7.2",
     "dotenv": "^17.2.1",
-    "hono": "^4.9.5",
+    "hono": "^4.9.6",
     "openai": "^5.16.0",
     "zod": "^3.25.76"
   },

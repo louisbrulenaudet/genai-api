@@ -25,7 +25,7 @@ api
 		c.res.headers.set("Access-Control-Allow-Methods", "GET, POST");
 		c.res.headers.set(
 			"Access-Control-Allow-Headers",
-			"Content-Type, Authorization",
+			"Content-Type, Authorization, X-API-Key",
 		);
 		if (c.req.method === "OPTIONS") {
 			return c.body(null, 204);

@@ -5,7 +5,7 @@ import OpenAI from "openai";
 
 import type { ZodType } from "zod";
 import type { Model, Provider } from "../enums/inference";
-import { ReasoningEffort } from "../enums/inference";
+import { ReasoningEffort, Timeout } from "../enums/inference";
 import { retryAsync } from "../utils/retry";
 
 interface InferenceParams {
@@ -31,7 +31,7 @@ export async function runInference({
 	const client = new OpenAI({
 		apiKey,
 		baseURL,
-		timeout: 120000, // 120 seconds timeout for API requests
+		timeout: Timeout.Long,
 	});
 
 	const payload = {

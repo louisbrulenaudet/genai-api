@@ -15,3 +15,9 @@ export enum ReasoningEffort {
 	Medium = "medium",
 	High = "high",
 }
+
+export enum Timeout {
+	Short = 10000,
+	Medium = 50000,
+	Long = 120000,
+}

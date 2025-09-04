@@ -4,7 +4,7 @@ import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { InferenceRequest, InferenceResponse } from "../dtos/inference";
 import type { Model, Provider } from "../enums/inference";
-import { inferenceProvider } from "../middlewares/inferenceProvider";
+import { apiKeyProvider } from "../middlewares/apiKeyProvider";
 import { runInferenceWithRetry } from "../services/inferenceService";
 
 const completion = new Hono<{ Bindings: Env }>();
@@ -12,7 +12,7 @@ const completion = new Hono<{ Bindings: Env }>();
 completion.post(
 	"/",
 	zValidator("json", InferenceRequest),
-	inferenceProvider,
+	apiKeyProvider,
 	async (c) => {
 		const body = c.req.valid("json");
 		const aiProvider = c.get("AIProvider");

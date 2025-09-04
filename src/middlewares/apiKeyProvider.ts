@@ -1,10 +1,10 @@
-// src/middlewares/inferenceProvider.ts
+// src/middlewares/apiKeyProvider.ts
 
 import type { Context } from "hono";
 import { createMiddleware } from "hono/factory";
 import { InferenceRequest } from "../dtos/inference";
 
-export const inferenceProvider = createMiddleware(async (c: Context, next) => {
+export const apiKeyProvider = createMiddleware(async (c: Context, next) => {
 	let rawBody: unknown;
 	try {
 		rawBody = await c.req.json();
@@ -26,8 +26,10 @@ export const inferenceProvider = createMiddleware(async (c: Context, next) => {
 
 	const { provider, model } = parseResult.data;
 
-	// Convert provider to ENV VAR format, e.g., google_ai_studio -> GOOGLE_AI_STUDIO_API_KEY
-	const envVarName = `${`${provider}`.toUpperCase().replace(/[^A-Z0-9]/g, "_")}_API_KEY`;
+	// Directly use provider from validated request for env var lookup
+	const envVarName = `${String(provider)
+		.toUpperCase()
+		.replace(/[^A-Z0-9]/g, "_")}_API_KEY`;
 
 	const headerApiKey = c.req.header("X-API-Key");
 	const cleanedApiKey = headerApiKey
@@ -46,7 +48,6 @@ export const inferenceProvider = createMiddleware(async (c: Context, next) => {
 		);
 	}
 
-	// Optionally, map provider to a baseURL if needed, fallback to AI_GATEWAY_BASE_URL
 	const baseURL = c.env.AI_GATEWAY_BASE_URL;
 
 	c.set("AIProvider", {

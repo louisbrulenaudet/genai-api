@@ -26,7 +26,7 @@ This repository provides a schema-driven TypeScript API for generative AI infere
 │   ├── routes/                 # API route handlers (completion, health)
 │   ├── dtos/                   # Data transfer objects (inference, health)
 │   ├── services/               # Service logic (inferenceService)
-│   ├── middlewares/            # Middleware (inferenceProvider)
+│   ├── middlewares/            # Middleware (apiKeyProvider)
 │   ├── enums/                  # Enums for types
 │   ├── types/                  # Type definitions (hono.d.ts)
 │   └── utils/                  # Utility functions (retry.ts)

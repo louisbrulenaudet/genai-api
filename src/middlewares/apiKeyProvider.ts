@@ -2,7 +2,7 @@
 
 import type { Context } from "hono";
 import { createMiddleware } from "hono/factory";
-import { InferenceRequest } from "../dtos/inference";
+import { InferenceConfig } from "../dtos";
 
 export const apiKeyProvider = createMiddleware(async (c: Context, next) => {
 	let rawBody: unknown;
@@ -12,8 +12,7 @@ export const apiKeyProvider = createMiddleware(async (c: Context, next) => {
 		return c.json({ error: "Invalid or missing JSON body" }, 400);
 	}
 
-	// Parse and validate the request body using Zod schema with defaults
-	const parseResult = InferenceRequest.safeParse(rawBody);
+	const parseResult = InferenceConfig.safeParse(rawBody);
 	if (!parseResult.success) {
 		return c.json(
 			{
@@ -24,7 +23,8 @@ export const apiKeyProvider = createMiddleware(async (c: Context, next) => {
 		);
 	}
 
-	const { provider, model } = parseResult.data;
+	const config = parseResult.data;
+	const provider = config.provider;
 
 	// Directly use provider from validated request for env var lookup
 	const envVarName = `${String(provider)
@@ -35,27 +35,33 @@ export const apiKeyProvider = createMiddleware(async (c: Context, next) => {
 	const cleanedApiKey = headerApiKey
 		? headerApiKey.trim().replace(/^bearer\s+/i, "")
 		: undefined;
+
+	// Prefer: body.apiKey > header > env
 	const apiKey =
-		cleanedApiKey && cleanedApiKey !== "" ? cleanedApiKey : c.env[envVarName];
+		config.apiKey && config.apiKey !== ""
+			? config.apiKey
+			: cleanedApiKey && cleanedApiKey !== ""
+				? cleanedApiKey
+				: c.env[envVarName];
 
 	if (!apiKey) {
 		return c.json(
 			{
 				error: `API key not found for provider: ${provider}`,
-				details: `Missing environment variable: ${envVarName} and no X-API-Key header provided.`,
+				details: `Missing environment variable: ${envVarName} and no X-API-Key header or body provided.`,
 			},
 			500,
 		);
 	}
 
-	const baseURL = c.env.AI_GATEWAY_BASE_URL;
-
-	c.set("AIProvider", {
+	const fullConfig = {
+		...config,
 		apiKey,
-		model,
-		baseURL,
-		provider,
-	});
+		accountId: config.accountId ?? c.env.CLOUDFLARE_ACCOUNT_ID,
+		gatewayId: config.gatewayId ?? c.env.CLOUDFLARE_AI_GATEWAY_ID,
+	};
+
+	c.set("AIProviderConfig", fullConfig);
 
 	await next();
 });

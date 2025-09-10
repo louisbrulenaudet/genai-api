@@ -13,6 +13,8 @@
   "send_metrics": false,
   "vars": {
     "ENVIRONMENT": "dev",
-    "AI_GATEWAY_BASE_URL": "https://gateway.ai.cloudflare.com/v1/0c17ffb490d11f8f4b663d52217cd19f/genai-api/compat"
+    "CLOUDFLARE_ACCOUNT_ID": "0c17ffb490d11f8f4b663d52217cd19f",
+    "CLOUDFLARE_AI_GATEWAY_ID": "genai-api",
+    "CLOUDFLARE_AI_GATEWAY_BASE_URL": "https://gateway.ai.cloudflare.com/v1"
   }
 }

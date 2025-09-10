@@ -1,11 +1,6 @@
 // src/utils/retry.ts
 
-type RetryOptions = {
-	maxRetries?: number;
-	sleepTime?: number;
-	raisesOnException?: boolean;
-	nonRetryExceptions?: Array<new (...args: unknown[]) => Error>;
-};
+import type { RetryOptions } from "../types/retry";
 
 function sleep(ms: number) {
 	return new Promise((resolve) => setTimeout(resolve, ms));

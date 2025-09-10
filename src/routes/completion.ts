@@ -2,44 +2,45 @@
 
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
-import { InferenceRequest, InferenceResponse } from "../dtos/inference";
-import type { Model, Provider } from "../enums/inference";
+import { InferenceRequest } from "../dtos/request";
+import { InferenceResponse } from "../dtos/response";
 import { apiKeyProvider } from "../middlewares/apiKeyProvider";
 import { runInferenceWithRetry } from "../services/inferenceService";
 
-const completion = new Hono<{ Bindings: Env }>();
+import type { CompletionContext } from "../types";
+
+const completion = new Hono<CompletionContext>();
 
 completion.post(
 	"/",
 	zValidator("json", InferenceRequest),
 	apiKeyProvider,
 	async (c) => {
-		const body = c.req.valid("json");
-		const aiProvider = c.get("AIProvider");
+		const inferenceConfig = c.get("AIProviderConfig");
 
-		if (!aiProvider) {
-			return c.json({ error: "Inference context missing" }, 500);
+		if (!inferenceConfig) {
+			return c.json({ error: "Inference config missing" }, 500);
 		}
 
-		const systemPrompt =
-			body.system ??
-			"You are a helpful assistant. Always respond in the user's language.";
+		console.log("Inference Config:", inferenceConfig);
 
 		const result = await runInferenceWithRetry({
-			provider: aiProvider.provider as Provider,
-			model: (body.model ?? aiProvider.model) as Model,
-			messages: [
-				{ role: "system", content: systemPrompt },
-				{ role: "user", content: body.input },
-			],
-			apiKey: aiProvider.apiKey,
-			baseURL: aiProvider.baseURL ?? "",
-			temperature: body.temperature ?? 0.2,
-			text_format: InferenceResponse,
-			reasoning_effort: body.reasoning_effort,
+			...inferenceConfig,
+			apiKey: inferenceConfig.apiKey ?? "",
 		});
 
-		return c.text((result as { content: string }).content);
+		const parseResult = InferenceResponse.safeParse(result);
+		if (!parseResult.success) {
+			return c.json(
+				{
+					error: "Invalid response from inference service",
+					details: parseResult.error.issues,
+				},
+				500,
+			);
+		}
+
+		return c.text(parseResult.data.content);
 	},
 );
 

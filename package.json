@@ -13,22 +13,23 @@
     "types": "wrangler types"
   },
   "dependencies": {
+    "@google/genai": "^1.19.0",
     "@hono/zod-validator": "^0.7.2",
     "dotenv": "^17.2.2",
     "hono": "^4.9.6",
-    "openai": "^5.19.1",
+    "openai": "^5.20.1",
     "zod": "^3.25.76"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.2.3",
-    "@cloudflare/vitest-pool-workers": "^0.8.70",
+    "@biomejs/biome": "2.1.4",
+    "@cloudflare/vitest-pool-workers": "^0.8.71",
     "@types/node": "^24.3.1",
     "cloc": "2.6.0-cloc",
     "typescript": "5.9.2",
     "vitest": "~3.2.4",
-    "wrangler": "^4.34.0"
+    "wrangler": "^4.35.0"
   },
-  "packageManager": "pnpm@10.15.0",
+  "packageManager": "pnpm@10.15.1",
   "engines": {
     "node": ">=18"
   }

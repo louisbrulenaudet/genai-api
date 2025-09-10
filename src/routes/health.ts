@@ -1,13 +1,13 @@
 // src/routes/health.ts
 
 import { Hono } from "hono";
-import { HealthResponse } from "../dtos/health";
+import { HealthResponse } from "../dtos";
 
 const health = new Hono();
 
 health.get("/", (c) => {
 	const response = { status: "ok" };
-	HealthResponse.parse(response);
+	HealthResponse.safeParse(response);
 	return c.json(response);
 });
 

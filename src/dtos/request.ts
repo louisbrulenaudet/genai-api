@@ -1,18 +1,39 @@
 // src/dtos/request.ts
 
 import { z } from "zod";
-import { Model, Provider, ReasoningEffort, Role } from "../enums";
+import { ContentType, Model, Provider, ReasoningEffort, Role } from "../enums";
+import {
+	getSupportedImageFormats,
+	isValidImageDataUrl,
+} from "../utils/imageUtils";
+
+export const TextContent = z.object({
+	type: z.literal(ContentType.TEXT),
+	text: z.string().max(200000),
+});
+
+export const ImageContent = z.object({
+	type: z.literal(ContentType.IMAGE_URL),
+	image_url: z.string().refine((url) => isValidImageDataUrl(url), {
+		message: `Invalid image data URL. Supported formats: ${getSupportedImageFormats().join(", ")}`,
+	}),
+});
+
+export const ContentBlock = z.union([TextContent, ImageContent]);
 
 export const Message = z
 	.object({
-		content: z.string().max(200000),
+		content: z.union([z.string().max(200000), z.array(ContentBlock)]),
 		role: z.nativeEnum(Role),
 	})
 	.transform((msg) => ({
 		...msg,
 		content:
-			[Role.System, Role.Developer].includes(msg.role) && !msg.content.trim()
-				? "You are a helpful assistant. Always respond in the user's language."
+			typeof msg.content === "string"
+				? [Role.System, Role.Developer].includes(msg.role) &&
+					!msg.content.trim()
+					? "You are a helpful assistant. Always respond in the user's language."
+					: msg.content
 				: msg.content,
 	}));
 

@@ -1,95 +1,50 @@
-# GenAI API Agent Instructions
+# Copilot Coding Agent Instructions for genai-api
 
 ## Project Overview
 
-This repository provides a schema-driven TypeScript API for generative AI inference and completion, built with Hono and OpenAI, and deployed as a Cloudflare Worker. It exposes endpoints for model inference, completion, and health checks, with strict validation and environment-based configuration. All business logic should be implemented in external services that consume this API.
+This repository implements a schema-driven TypeScript API for generative AI inference and completion, using Hono (web framework), Zod (validation), and OpenAI/Google GenAI as backends. It is designed for deployment as a Cloudflare Worker, exposing endpoints for model inference, completion, and health checks. All business logic is delegated to external services; the API is strictly a validation and routing layer.
 
-## Tech Stack
+## Architecture & Structure
 
-- **Language:** TypeScript (strict mode, ES2021/ES2022)
-- **Framework:** Hono
-- **AI Integration:** OpenAI API
-- **Validation:** Zod
-- **Deployment:** Cloudflare Workers (Wrangler)
-- **Formatting/Linting:** Biome (spaces, double quotes, recommended rules)
-- **Build Tools:** pnpm, Wrangler
-- **Testing:** Vitest
-- **Automation:** Makefile, pnpm scripts
-- **Environment:** dotenv (.dev.vars, .prod.vars)
+- **src/index.ts**: API entry point, sets up Hono app and routes.
+- **src/routes/**: Route handlers (e.g., `completion.ts`, `health.ts`). No business logic here—only request validation and delegation to services.
+- **src/dtos/**: Data transfer objects for request/response schemas. Use Zod for all validation.
+- **src/services/**: Service logic (e.g., `inferenceService.ts`), including provider abstractions for OpenAI and Google GenAI.
+- **src/services/providers/**: Provider implementations (e.g., `googleGenAIProvider.ts`). Each provider extends `baseInferenceProvider.ts` and encapsulates API-specific logic.
+- **src/middlewares/**: Middleware (e.g., `apiKeyProvider.ts`).
+- **src/enums/**, **src/types/**: Centralized enums and type definitions.
+- **src/utils/**: Utility functions (e.g., `retry.ts`, `imageUtils.ts`).
 
-## Project Structure
+## Key Patterns & Conventions
 
-```
-.
-├── src/
-│   ├── index.ts                # API entry point
-│   ├── routes/                 # API route handlers (completion, health)
-│   ├── dtos/                   # Data transfer objects (inference, health)
-│   ├── services/               # Service logic (inferenceService)
-│   ├── middlewares/            # Middleware (apiKeyProvider)
-│   ├── enums/                  # Enums for types
-│   ├── types/                  # Type definitions (hono.d.ts)
-│   └── utils/                  # Utility functions (retry.ts)
-├── Makefile                    # CLI automation for dev, deploy, format, lint, etc.
-├── package.json                # Scripts, dependencies
-├── tsconfig.json               # TypeScript config (strict, ES2021/ES2022)
-├── wrangler.jsonc              # Cloudflare Worker config
-├── .dev.vars/.prod.vars        # Environment variables
-├── README.md                   # Usage and setup instructions
-└── AGENTS.md                   # Agent instructions (this file)
-```
+- **Strict TypeScript**: All code is type-safe and uses strict mode. No business logic in routes or DTOs.
+- **Validation**: All input/output is validated with Zod schemas in `src/dtos/`.
+- **Provider Abstraction**: Add new AI providers by extending `baseInferenceProvider.ts` and registering in `inferenceService.ts`.
+- **Environment Config**: Use `.dev.vars` and `.prod.vars` for secrets/configuration. Never hardcode secrets.
+- **Formatting/Linting**: Use Biome (spaces, double quotes). Run `make format` and `make lint` before committing.
+- **Automation**: Use the Makefile for all workflows (dev, deploy, format, lint, types, cloc). Example: `make dev` to start the dev server.
+- **No Business Logic in API**: The API is a thin layer; all business logic must be implemented in external consumers.
 
-## Development Workflow
+## Developer Workflows
 
-1. **Install dependencies:**
-   `make init`
-2. **Configure environment:**
-   Copy `.dev.vars.example` to `.dev.vars` and `.prod.vars.example` to `.prod.vars`, then edit as needed.
-3. **Start development server:**
-   `make dev`
-4. **Format and lint:**
-   `make format` and `make lint`
-5. **Deploy:**
-   `make deploy`
-6. **Generate types:**
-   `make types`
-7. **Count lines of code:**
-   `make cloc`
+- **Install dependencies**: `make init`
+- **Start dev server**: `make dev`
+- **Format/lint**: `make format` / `make lint`
+- **Deploy**: `make deploy`
+- **Generate types**: `make types`
+- **Count lines**: `make cloc`
 
-## Common Commands
+## Integration Points
 
-| Command   | Description                                 |
-|-----------|---------------------------------------------|
-| `make init`      | Initialize the project                      |
-| `make update`    | Update dependencies                         |
-| `make dev`       | Run development server                      |
-| `make deploy`    | Deploy the application                      |
-| `make format`    | Format codebase with Biome                  |
-| `make lint`      | Lint codebase with Biome                    |
-| `make types`     | Generate TypeScript worker types            |
-| `make cloc`      | Count lines of code in src/                 |
+- **OpenAI/Google GenAI**: Providers in `src/services/providers/` handle API integration. See `googleGenAIProvider.ts` for request/response mapping.
+- **Cloudflare Worker**: Configured via `wrangler.jsonc`.
+- **Environment**: Managed via dotenv files and Makefile.
 
-## Coding Conventions
+## Examples
 
-- Use **strict TypeScript** everywhere.
-- Use **Biome** for formatting and linting (spaces, double quotes).
-- Use **Zod** for all validation.
-- Use **dotenv** for environment configuration.
-- No business logic in API endpoints or DTOs.
-- Use Makefile for automation and consistency.
+- To add a new provider, create a class in `src/services/providers/` extending `baseInferenceProvider.ts`, then register it in `inferenceService.ts`.
+- To add a new endpoint, create a route in `src/routes/`, validate with Zod DTOs, and delegate to a service.
 
-## Best Practices
+---
 
-- Keep code modular and type-safe.
-- Store secrets and configuration in environment variables.
-- Always run lint and format before committing.
-- Use Makefile for common tasks.
-- Update documentation and examples when API changes.
-- Follow semantic versioning for releases.
-
-## Contribution
-
-- Follow all coding conventions and rules.
-- Do not add business logic to API endpoints or DTOs.
-- Ensure all changes pass lint, format, and tests.
-- Document any API changes.
+For further details, see `README.md` and `AGENTS.md`. All changes must pass lint, format, and tests before merging.

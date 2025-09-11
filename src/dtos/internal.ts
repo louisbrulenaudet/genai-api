@@ -12,4 +12,10 @@ export const InferenceConfig = z.intersection(
 	}),
 );
 
+export const ClientConfigSchema = z.object({
+	apiKey: z.string().min(1, "API key is required"),
+	baseUrl: z.string().url("baseUrl must be a valid URL"),
+});
+
+export type ClientConfig = z.infer<typeof ClientConfigSchema>;
 export type InferenceConfigType = z.infer<typeof InferenceConfig>;

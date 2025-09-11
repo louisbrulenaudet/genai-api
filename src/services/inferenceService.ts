@@ -5,14 +5,14 @@ import type { InferenceResponseType } from "../dtos";
 import { Provider } from "../enums/provider";
 import type { InferenceParams } from "../types";
 import { retryAsync } from "../utils/retry";
-import { GeminiProvider } from "./providers/geminiProvider";
+import { GoogleGenAIProvider } from "./providers/googleGenAIProvider";
 
 export async function runInference(
 	request: InferenceParams & { text_format?: ZodType<unknown> },
 ): Promise<InferenceResponseType> {
 	switch (request.provider) {
 		case Provider.GoogleAIStudio: {
-			const providerInstance = new GeminiProvider(request);
+			const providerInstance = new GoogleGenAIProvider(request);
 			const content = await providerInstance.runInference(request);
 
 			if (content === null) {

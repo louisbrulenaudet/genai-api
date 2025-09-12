@@ -17,13 +17,13 @@
     "@hono/zod-validator": "^0.7.2",
     "dotenv": "^17.2.2",
     "hono": "^4.9.7",
-    "openai": "^5.20.1",
+    "openai": "^5.20.2",
     "zod": "^3.25.76"
   },
   "devDependencies": {
     "@biomejs/biome": "2.1.4",
     "@cloudflare/vitest-pool-workers": "^0.8.71",
-    "@types/node": "^24.3.1",
+    "@types/node": "^24.3.2",
     "cloc": "2.6.0-cloc",
     "typescript": "5.9.2",
     "vitest": "~3.2.4",

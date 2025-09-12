@@ -1,13 +1,29 @@
-// src/services/providers/geminiProvider.ts
+// src/services/providers/googleGenAIProvider.ts
 
+import { env } from "cloudflare:workers";
 import type { Content, GenerationConfig } from "@google/genai";
-import { googleGenAIClient } from "../../clients";
+import { getGoogleGenAIClient, googleGenAIClient } from "../../clients";
 import type { InferenceRequestType, InferenceResponseType } from "../../dtos";
 import { ContentType, Role } from "../../enums";
+import type { InferenceParams } from "../../types/inference";
 import { InferenceProvider } from "./baseInferenceProvider";
 
 export class GoogleGenAIProvider extends InferenceProvider {
-	private client = googleGenAIClient;
+	private client:
+		| ReturnType<typeof getGoogleGenAIClient>
+		| typeof googleGenAIClient;
+
+	constructor(inferenceConfig: InferenceParams) {
+		super(inferenceConfig);
+		const apiKey = inferenceConfig.apiKey;
+		const baseUrl =
+			inferenceConfig.baseURL ??
+			`${env.CLOUDFLARE_AI_GATEWAY_BASE_URL}/${env.CLOUDFLARE_ACCOUNT_ID}/${env.CLOUDFLARE_AI_GATEWAY_ID}/google-ai-studio`;
+
+		this.client = apiKey
+			? getGoogleGenAIClient({ apiKey, baseUrl })
+			: googleGenAIClient;
+	}
 
 	async runInference(
 		request: InferenceRequestType,

@@ -13,13 +13,13 @@ importers:
         version: 1.19.0
       '@hono/zod-validator':
         specifier: ^0.7.2
-        version: 0.7.2(hono@4.9.6)(zod@3.25.76)
+        version: 0.7.2(hono@4.9.7)(zod@3.25.76)
       dotenv:
         specifier: ^17.2.2
         version: 17.2.2
       hono:
-        specifier: ^4.9.6
-        version: 4.9.6
+        specifier: ^4.9.7
+        version: 4.9.7
       openai:
         specifier: ^5.20.1
         version: 5.20.1(ws@8.18.3)(zod@3.25.76)
@@ -46,8 +46,8 @@ importers:
         specifier: ~3.2.4
         version: 3.2.4(@types/node@24.3.1)
       wrangler:
-        specifier: ^4.35.0
-        version: 4.35.0
+        specifier: ^4.36.0
+        version: 4.36.0
 
 packages:
 
@@ -928,8 +928,8 @@ packages:
     resolution: {integrity: sha512-pCcEwRi+TKpMlxAQObHDQ56KawURgyAf6jtIY046fJ5tIv3zDe/LEIubckAO8fj6JnAxLdmWkUfNyulQ2iKdEw==}
     engines: {node: '>=14.0.0'}
 
-  hono@4.9.6:
-    resolution: {integrity: sha512-doVjXhSFvYZ7y0dNokjwwSahcrAfdz+/BCLvAMa/vHLzjj8+CFyV5xteThGUsKdkaasgN+gF2mUxao+SGLpUeA==}
+  hono@4.9.7:
+    resolution: {integrity: sha512-t4Te6ERzIaC48W3x4hJmBwgNlLhmiEdEE5ViYb02ffw4ignHNHa5IBtPjmbKstmtKa8X6C35iWwK4HaqvrzG9w==}
     engines: {node: '>=16.9.0'}
 
   https-proxy-agent@7.0.6:
@@ -972,6 +972,11 @@ packages:
 
   miniflare@4.20250906.0:
     resolution: {integrity: sha512-T/RWn1sa0ien80s6NjU+Un/tj12gR6wqScZoiLeMJDD4/fK0UXfnbWXJDubnUED8Xjm7RPQ5ESYdE+mhPmMtuQ==}
+    engines: {node: '>=18.0.0'}
+    hasBin: true
+
+  miniflare@4.20250906.1:
+    resolution: {integrity: sha512-yuPHog7j+GKHtRaKKF3Mpwvb5SVtvmkQpY/f9Ue0xhG/fYQcaxTKVO6RAB1pUN1jSyvmDOxVEAFFVoni8GYl3g==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -1115,6 +1120,10 @@ packages:
   undici-types@7.10.0:
     resolution: {integrity: sha512-t5Fy/nfn+14LuOc2KNYg75vZqClpAiqscVvMygNnlsHBFpSXdJaYtXMcdNLpl/Qvc3P2cB3s6lOV51nqsFq4ag==}
 
+  undici@7.14.0:
+    resolution: {integrity: sha512-Vqs8HTzjpQXZeXdpsfChQTlafcMQaaIwnGwLam1wudSSjlJeQ3bw1j+TLPePgrCnCpUXx7Ba5Pdpf5OBih62NQ==}
+    engines: {node: '>=20.18.1'}
+
   undici@7.16.0:
     resolution: {integrity: sha512-QEg3HPMll0o3t2ourKwOeUAZ159Kn9mx5pnzHRQO8+Wixmh88YdZRiIwat0iNzNNXn0yoEtXJqFpyW7eM8BV7g==}
     engines: {node: '>=20.18.1'}
@@ -1217,6 +1226,16 @@ packages:
 
   wrangler@4.35.0:
     resolution: {integrity: sha512-HbyXtbrh4Fi3mU8ussY85tVdQ74qpVS1vctUgaPc+bPrXBTqfDLkZ6VRtHAVF/eBhz4SFmhJtCQpN1caY2Ak8A==}
+    engines: {node: '>=18.0.0'}
+    hasBin: true
+    peerDependencies:
+      '@cloudflare/workers-types': ^4.20250906.0
+    peerDependenciesMeta:
+      '@cloudflare/workers-types':
+        optional: true
+
+  wrangler@4.36.0:
+    resolution: {integrity: sha512-J1sZh7ePy7BtzvIyt9ufiL6aQOW6OE0VEi9YJiyXOuaXDKrR7V5HJBTsraNdFDqXgi30mYGGBVs0mgZHGRhTBA==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:
@@ -1512,9 +1531,9 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@hono/zod-validator@0.7.2(hono@4.9.6)(zod@3.25.76)':
+  '@hono/zod-validator@0.7.2(hono@4.9.7)(zod@3.25.76)':
     dependencies:
-      hono: 4.9.6
+      hono: 4.9.7
       zod: 3.25.76
 
   '@img/sharp-darwin-arm64@0.33.5':
@@ -1928,7 +1947,7 @@ snapshots:
       - encoding
       - supports-color
 
-  hono@4.9.6: {}
+  hono@4.9.7: {}
 
   https-proxy-agent@7.0.6:
     dependencies:
@@ -1978,6 +1997,24 @@ snapshots:
       sharp: 0.33.5
       stoppable: 1.1.0
       undici: 7.16.0
+      workerd: 1.20250906.0
+      ws: 8.18.0
+      youch: 4.1.0-beta.10
+      zod: 3.22.3
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
+  miniflare@4.20250906.1:
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      acorn: 8.14.0
+      acorn-walk: 8.3.2
+      exit-hook: 2.2.1
+      glob-to-regexp: 0.4.1
+      sharp: 0.33.5
+      stoppable: 1.1.0
+      undici: 7.14.0
       workerd: 1.20250906.0
       ws: 8.18.0
       youch: 4.1.0-beta.10
@@ -2125,6 +2162,8 @@ snapshots:
 
   undici-types@7.10.0: {}
 
+  undici@7.14.0: {}
+
   undici@7.16.0: {}
 
   unenv@2.0.0-rc.21:
@@ -2242,6 +2281,22 @@ snapshots:
       blake3-wasm: 2.1.5
       esbuild: 0.25.4
       miniflare: 4.20250906.0
+      path-to-regexp: 6.3.0
+      unenv: 2.0.0-rc.21
+      workerd: 1.20250906.0
+    optionalDependencies:
+      fsevents: 2.3.3
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
+  wrangler@4.36.0:
+    dependencies:
+      '@cloudflare/kv-asset-handler': 0.4.0
+      '@cloudflare/unenv-preset': 2.7.3(unenv@2.0.0-rc.21)(workerd@1.20250906.0)
+      blake3-wasm: 2.1.5
+      esbuild: 0.25.4
+      miniflare: 4.20250906.1
       path-to-regexp: 6.3.0
       unenv: 2.0.0-rc.21
       workerd: 1.20250906.0

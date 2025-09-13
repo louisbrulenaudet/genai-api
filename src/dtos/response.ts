@@ -3,7 +3,7 @@
 import { z } from "zod";
 
 export const HealthResponse = z.object({
-	status: z.literal("ok"),
+	status: z.literal("API successfully started ☁️"),
 });
 
 export const InferenceResponse = z.object({

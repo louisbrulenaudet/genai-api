@@ -6,6 +6,7 @@ import { getGoogleGenAIClient, googleGenAIClient } from "../../clients";
 import type { InferenceRequestType, InferenceResponseType } from "../../dtos";
 import { ContentType, Provider, Role } from "../../enums";
 import type { ContentBlock, InferenceParams } from "../../types/inference";
+import { parseDataUrl } from "../../utils/imageUtils";
 import { InferenceProvider } from "./baseInferenceProvider";
 
 export class GoogleGenAIProvider extends InferenceProvider {
@@ -25,18 +26,10 @@ export class GoogleGenAIProvider extends InferenceProvider {
 			: googleGenAIClient;
 	}
 
-	private parseDataUrl(dataUrl: string) {
-		const match = dataUrl.match(/^data:([^;]+);base64,(.*)$/s);
-		if (!match) return null;
-		const mimeType = match[1];
-		const data = match[2].replace(/\s+/g, "");
-		return { mimeType, data };
-	}
-
 	private convertBlockToPart(block: ContentBlock) {
 		if (block.type === ContentType.TEXT) return { text: block.text };
 		if (block.type === ContentType.IMAGE_URL) {
-			const parsed = this.parseDataUrl(block.image_url);
+			const parsed = parseDataUrl(block.image_url);
 			return parsed
 				? { inlineData: { mimeType: parsed.mimeType, data: parsed.data } }
 				: null;

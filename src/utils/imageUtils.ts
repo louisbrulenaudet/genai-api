@@ -33,3 +33,13 @@ export function isValidImageDataUrl(dataUrl: string): boolean {
 export function getSupportedImageFormats(): ImageFormat[] {
 	return Object.values(ImageFormat);
 }
+
+export function parseDataUrl(
+	dataUrl: string,
+): { mimeType: string; data: string } | null {
+	const match = dataUrl.match(/^data:([^;]+);base64,(.*)$/s);
+	if (!match) return null;
+	const mimeType = match[1];
+	const data = match[2].replace(/\s+/g, "");
+	return { mimeType, data };
+}

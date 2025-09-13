@@ -2,8 +2,7 @@
 
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
-import { InferenceRequest } from "../dtos/request";
-import { InferenceResponse } from "../dtos/response";
+import { InferenceRequest, InferenceResponse } from "../dtos";
 import { apiKeyProvider } from "../middlewares/apiKeyProvider";
 import { runInferenceWithRetry } from "../services/inferenceService";
 

@@ -8,7 +8,8 @@ export function extractImageFormat(dataUrl: string): ImageFormat | null {
 
 	const format = match[1];
 	// Handle jpg/jpeg equivalence
-	const normalizedFormat = format === "jpg" ? "jpeg" : format;
+	const normalizedFormat =
+		format === ImageFormat.JPG ? ImageFormat.JPEG : format;
 	return Object.values(ImageFormat).includes(normalizedFormat as ImageFormat)
 		? (normalizedFormat as ImageFormat)
 		: null;

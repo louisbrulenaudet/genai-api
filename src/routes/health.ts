@@ -6,9 +6,9 @@ import { HealthResponse } from "../dtos";
 const health = new Hono();
 
 health.get("/", (c) => {
-	const response = { status: "ok" };
-	HealthResponse.safeParse(response);
-	return c.json(response);
+	const response = { status: "API successfully started ☁️" };
+	const parseResponse = HealthResponse.safeParse(response);
+	return c.json(parseResponse);
 });
 
 export default health;

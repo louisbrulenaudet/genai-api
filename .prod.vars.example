@@ -1,4 +1,4 @@
-CLOUDFLARE_AI_GATEWAY_BASE_URL="https://gateway.ai.cloudflare.com/v1
+CLOUDFLARE_AI_GATEWAY_BASE_URL="https://gateway.ai.cloudflare.com/v1"
 CLOUDFLARE_ACCOUNT_ID="your_cloudflare_account_id"
 CLOUDFLARE_AI_GATEWAY_ID="your_cloudflare_ai_gateway_id"
 GOOGLE_AI_STUDIO_API_KEY="your_google_ai_studio_api_key_here"

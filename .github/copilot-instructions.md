@@ -1,4 +1,4 @@
-# Copilot Coding Agent Instructions for genai-api
+#  Coding Agent Instructions for genai-api
 
 ## Project Overview
 

@@ -15,7 +15,7 @@ The objective of this repo is to provide a very simple and easy-to-use API for d
 
 ```bash
 wrangler secret put GOOGLE_AI_STUDIO_API_KEY
-````
+```
 
 Wrangler will prompt you to enter your API key, which will be securely stored as a secret environment variable in your Cloudflare Worker. If you don't have an API key yet, you can get one from the [Google AI Studio](https://aistudio.google.com/apikey).
 
@@ -40,25 +40,73 @@ Here you go! Your API is now deployed and ready to use. You can test it by sendi
 - **Providers:** `google-ai-studio`
 - **Models:** `gemini-2.5-flash`, `gemini-2.5-flash-lite`, `gemini-2.0-flash`, `gemini-2.0-flash-lite`
 
+### POST `/completion`
+
+The API supports both text and image input (multimodal). You can send images (as data URLs) alongside text in your requests, enabling advanced use cases such as visual question answering, image captioning, and more.
+
 Send a POST request to `/completion` with a JSON body:
 
 ```http
 POST /completion
 Content-Type: application/json
+Authorization: Bearer your_token
 X-API-Key: your_provider_specific_api_key
 
 {
-  "input": "What is the capital of France?",
-  "system": "You are a helpful assistant.",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a helpful assistant."
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "What is in this image?"
+        },
+        {
+          "type": "image_url",
+          "image_url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+        }
+      ]
+    }
+  ],
   "temperature": 0.7,
   "model": "gemini-2.0-flash"
 }
 ```
 
-- `input` (string, required): The user prompt.
-- `system` (string, optional): System prompt for context.
-- `temperature` (number, optional): Sampling temperature (default 0.2).
-- `model` (string, optional): Model name (e.g., "gemini-2.0-flash").
+Or, with only text:
+
+```http
+POST /completion
+Content-Type: application/json
+Authorization: Bearer your_token
+X-API-Key: your_provider_specific_api_key
+
+{
+	"messages": [
+		{
+				"role": "user",
+				"content": "What is the capital of France?"
+		}
+	]
+}
+```
+
+#### Request Parameters
+
+- `messages` (array, required): List of message objects, each with:
+  - `role` (string, required): One of `"system"`, `"user"`, `"assistant"`, `"developer"`.
+  - `content` (string or array, required): Either a string (text) or an array of content blocks:
+    - Text block: `{ "type": "text", "text": "..." }`
+    - Image block: `{ "type": "image_url", "image_url": "<data URL>" }`
+      - **Image must be a valid data URL.**
+- `temperature` (number, optional): Sampling temperature (default 0.2, range 0–2).
+- `provider` (string, optional): Provider name (default: `google-ai-studio`).
+- `model` (string, optional): Model name (default: `gemini-2.5-flash`).
+- `reasoning_effort` (string, optional): Reasoning effort level.
 
 The response will be plain text with the model's completion.
 
@@ -90,9 +138,11 @@ make init
 3. Set up environment variables in `.dev.vars`:
 
 ```sh
+CLOUDFLARE_AI_GATEWAY_BASE_URL=https://gateway.ai.cloudflare.com/v1
+CLOUDFLARE_ACCOUNT_ID=your_account_id
+CLOUDFLARE_AI_GATEWAY_ID=your_cloudflare_ai_gateway_id
 GOOGLE_AI_STUDIO_API_KEY=your_api_key
 BEARER_TOKEN=your_bearer_token
-AI_GATEWAY_BASE_URL=your_ai_gateway_base_url
 ```
 
 4. Start the development server:

@@ -22,8 +22,6 @@ completion.post(
 			return c.json({ error: "Inference config missing" }, 500);
 		}
 
-		console.log("Inference Config:", inferenceConfig);
-
 		const result = await runInferenceWithRetry({
 			...inferenceConfig,
 			apiKey: inferenceConfig.apiKey ?? "",

@@ -3,6 +3,7 @@
 import { env } from "cloudflare:workers";
 import { GoogleGenAI } from "@google/genai";
 import type { ClientConfig } from "../dtos";
+import  { Provider } from "../enums";
 import { BaseClient } from "./baseClient";
 
 export function getGoogleGenAIClient(config: unknown): GoogleGenAI {
@@ -20,5 +21,5 @@ export function getGoogleGenAIClient(config: unknown): GoogleGenAI {
 
 export const googleGenAIClient = getGoogleGenAIClient({
 	apiKey: env.GOOGLE_AI_STUDIO_API_KEY,
-	baseUrl: `${env.CLOUDFLARE_AI_GATEWAY_BASE_URL}/${env.CLOUDFLARE_ACCOUNT_ID}/${env.CLOUDFLARE_AI_GATEWAY_ID}/google-ai-studio`,
+	baseUrl: `${env.CLOUDFLARE_AI_GATEWAY_BASE_URL}/${env.CLOUDFLARE_ACCOUNT_ID}/${env.CLOUDFLARE_AI_GATEWAY_ID}/${Provider.GoogleAIStudio}`,
 });

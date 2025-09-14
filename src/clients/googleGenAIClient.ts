@@ -3,7 +3,7 @@
 import { env } from "cloudflare:workers";
 import { GoogleGenAI } from "@google/genai";
 import type { ClientConfig } from "../dtos";
-import  { Provider } from "../enums";
+import { Provider } from "../enums";
 import { BaseClient } from "./baseClient";
 
 export function getGoogleGenAIClient(config: unknown): GoogleGenAI {

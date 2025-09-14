@@ -3,6 +3,52 @@
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",
+  "type": "module",
+  "description": "TypeScript API for generative AI inference and completion, built with Hono, Zod, OpenAI, and Google GenAI. Deployable as a Cloudflare Worker to supercharge Apple Shortcuts and developer workflows.",
+  "keywords": [
+    "generative AI",
+    "API",
+    "TypeScript",
+    "Hono",
+    "Zod",
+    "OpenAI",
+    "Google GenAI",
+    "Cloudflare Worker",
+    "Apple Shortcuts",
+    "inference",
+    "completion",
+    "multimodal",
+    "Gemini",
+    "AI integration",
+    "developer tools"
+  ],
+  "homepage": "https://github.com/louisbrulenaudet/genai-api#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/louisbrulenaudet/genai-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/louisbrulenaudet/genai-api/issues",
+    "email": "louisbrulenaudet@icloud.com"
+  },
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Louis Brulé Naudet",
+    "email": "louisbrulenaudet@icloud.com",
+    "url": "https://github.com/louisbrulenaudet"
+  },
+  "contributors": [
+    {
+      "name": "Louis Brulé Naudet",
+      "email": "louisbrulenaudet@icloud.com",
+      "url": "https://github.com/louisbrulenaudet"
+    }
+  ],
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/louisbrulenaudet"
+  },
+  "readme": "README.md",
   "scripts": {
     "format": "biome format --write src",
     "lint": "biome check --write src",

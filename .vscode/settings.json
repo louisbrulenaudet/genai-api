@@ -2,12 +2,14 @@
   "biome.organizeImports": true,
   "editor.formatOnSave": true,
   "cSpell.words": [
+    "Brulé",
     "cloc",
     "dotenv",
     "dtos",
     "genai",
     "Hono",
     "multimodal",
+    "Naudet",
     "Vitest"
   ]
 }

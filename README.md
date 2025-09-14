@@ -86,12 +86,12 @@ Authorization: Bearer your_token
 X-API-Key: your_provider_specific_api_key
 
 {
-	"messages": [
-		{
-				"role": "user",
-				"content": "What is the capital of France?"
-		}
-	]
+  "messages": [
+    {
+      "role": "user",
+      "content": "What is the capital of France?"
+    }
+  ]
 }
 ```
 

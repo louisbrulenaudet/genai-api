@@ -4,7 +4,7 @@ import { env } from "cloudflare:workers";
 import type { Content, GenerationConfig } from "@google/genai";
 import { getGoogleGenAIClient, googleGenAIClient } from "../../clients";
 import type { InferenceRequestType, InferenceResponseType } from "../../dtos";
-import { ContentType, Provider, Role } from "../../enums";
+import { ContentType, Provider, ReasoningEffort, Role } from "../../enums";
 import type { ContentBlock, InferenceParams } from "../../types/inference";
 import { parseDataUrl } from "../../utils/imageUtils";
 import { InferenceProvider } from "./baseInferenceProvider";
@@ -68,11 +68,18 @@ export class GoogleGenAIProvider extends InferenceProvider {
 		const systemMsg = request.messages.find((m) => m.role === Role.System);
 		const contents: Content[] = this.transformMessages(request.messages);
 
+		const reasoningEffort = this.inferenceConfig.reasoning_effort;
+		const thinkingBudget = reasoningEffort === ReasoningEffort.None ? 0 : -1;
+
 		const result = await this.client.models.generateContent({
 			model: request.model,
 			contents,
 			config: {
 				temperature: request.temperature,
+				thinkingBudget,
+				thinkingConfig: {
+					thinkingBudget: thinkingBudget,
+				},
 				...(systemMsg && {
 					systemInstruction:
 						typeof systemMsg.content === "string"

@@ -3,7 +3,7 @@
 import { type ClientConfig, ClientConfigSchema } from "../dtos";
 
 export class BaseClient {
-	private static instances: Map<string, unknown> = new Map();
+	private static readonly instances: Map<string, unknown> = new Map();
 	private static MAX_INSTANCES = 50;
 
 	protected constructor() {}

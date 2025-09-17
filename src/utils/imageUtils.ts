@@ -3,7 +3,8 @@
 import { ImageFormat } from "../enums";
 
 export function extractImageFormat(dataUrl: string): ImageFormat | null {
-	const match = dataUrl.match(/^data:image\/([^;]+);base64,/);
+	const regex = /^data:image\/([^;]+);base64,/;
+	const match = regex.exec(dataUrl);
 	if (!match) return null;
 
 	const format = match[1];
@@ -38,7 +39,8 @@ export function getSupportedImageFormats(): ImageFormat[] {
 export function parseDataUrl(
 	dataUrl: string,
 ): { mimeType: string; data: string } | null {
-	const match = dataUrl.match(/^data:([^;]+);base64,(.*)$/s);
+	const regex = /^data:([^;]+);base64,(.*)$/s;
+	const match = regex.exec(dataUrl);
 	if (!match) return null;
 	const mimeType = match[1];
 	const data = match[2].replace(/\s+/g, "");

@@ -26,16 +26,23 @@ export const Message = z
 		content: z.union([z.string().max(200000), z.array(ContentBlock)]),
 		role: z.nativeEnum(Role),
 	})
-	.transform((msg) => ({
-		...msg,
-		content:
-			typeof msg.content === "string"
-				? [Role.System, Role.Developer].includes(msg.role) &&
-					!msg.content.trim()
-					? "You are a helpful assistant. Always respond in the user's language."
-					: msg.content
-				: msg.content,
-	}));
+	.transform((msg) => {
+		let content = msg.content;
+		if (typeof msg.content === "string") {
+			const isSystemOrDeveloper = [Role.System, Role.Developer].includes(
+				msg.role,
+			);
+			if (isSystemOrDeveloper && !msg.content.trim()) {
+				content =
+					"You are a helpful assistant. Always respond in the user's language.";
+			}
+		}
+
+		return {
+			...msg,
+			content,
+		};
+	});
 
 export const Messages = z.array(Message);
 

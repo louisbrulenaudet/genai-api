@@ -43,17 +43,22 @@ export class GoogleGenAIProvider extends InferenceProvider {
 		return messages
 			.filter((m) => m.role !== Role.System)
 			.map((message) => {
-				const parts =
-					typeof message.content === "string"
-						? [{ text: message.content }]
-						: Array.isArray(message.content)
-							? (message.content
-									.map((b) => this.convertBlockToPart(b))
-									.filter(Boolean) as Array<
-									| { text: string }
-									| { inlineData: { mimeType: string; data: string } }
-								>)
-							: [];
+				let parts: Array<
+					{ text: string } | { inlineData: { mimeType: string; data: string } }
+				> = [];
+
+				if (typeof message.content === "string") {
+					parts = [{ text: message.content }];
+				} else if (Array.isArray(message.content)) {
+					parts = message.content
+						.map((b) => this.convertBlockToPart(b))
+						.filter(Boolean) as Array<
+						| { text: string }
+						| { inlineData: { mimeType: string; data: string } }
+					>;
+				} else {
+					parts = [];
+				}
 
 				return {
 					role: message.role.toLowerCase(),
@@ -71,6 +76,16 @@ export class GoogleGenAIProvider extends InferenceProvider {
 		const reasoningEffort = this.inferenceConfig.reasoning_effort;
 		const thinkingBudget = reasoningEffort === ReasoningEffort.None ? 0 : -1;
 
+		const systemInstruction = (() => {
+			if (!systemMsg) return "";
+			const content = systemMsg.content;
+			if (typeof content === "string") return content;
+			if (Array.isArray(content) && content[0]?.type === ContentType.TEXT) {
+				return content[0].text;
+			}
+			return "";
+		})();
+
 		const result = await this.client.models.generateContent({
 			model: request.model,
 			contents,
@@ -80,15 +95,7 @@ export class GoogleGenAIProvider extends InferenceProvider {
 				thinkingConfig: {
 					thinkingBudget: thinkingBudget,
 				},
-				...(systemMsg && {
-					systemInstruction:
-						typeof systemMsg.content === "string"
-							? systemMsg.content
-							: Array.isArray(systemMsg.content) &&
-									systemMsg.content[0]?.type === ContentType.TEXT
-								? systemMsg.content[0].text
-								: "",
-				}),
+				...(systemMsg && { systemInstruction }),
 			} as GenerationConfig,
 		});
 

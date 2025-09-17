@@ -36,13 +36,14 @@ export const apiKeyProvider = createMiddleware(async (c: Context, next) => {
 		? headerApiKey.trim().replace(/^bearer\s+/i, "")
 		: undefined;
 
-	// Prefer: body.apiKey > header > env
-	const apiKey =
-		config.apiKey && config.apiKey !== ""
-			? config.apiKey
-			: cleanedApiKey && cleanedApiKey !== ""
-				? cleanedApiKey
-				: c.env[envVarName];
+	let apiKey: string | undefined;
+	if (config.apiKey && config.apiKey !== "") {
+		apiKey = config.apiKey;
+	} else if (cleanedApiKey && cleanedApiKey !== "") {
+		apiKey = cleanedApiKey;
+	} else {
+		apiKey = c.env[envVarName];
+	}
 
 	if (!apiKey) {
 		return c.json(

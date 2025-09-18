@@ -10,7 +10,7 @@ import { parseDataUrl } from "../../utils/imageUtils";
 import { InferenceProvider } from "./baseInferenceProvider";
 
 export class GoogleGenAIProvider extends InferenceProvider {
-	private client:
+	private readonly client:
 		| ReturnType<typeof getGoogleGenAIClient>
 		| typeof googleGenAIClient;
 

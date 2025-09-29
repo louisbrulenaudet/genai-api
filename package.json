@@ -68,7 +68,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.4",
-    "@cloudflare/vitest-pool-workers": "^0.9.3",
+    "@cloudflare/vitest-pool-workers": "^0.9.7",
     "@types/node": "^24.5.2",
     "cloc": "2.6.0-cloc",
     "typescript": "5.9.2",

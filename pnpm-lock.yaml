@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@google/genai':
-        specifier: ^1.20.0
-        version: 1.20.0
+        specifier: ^1.21.0
+        version: 1.21.0
       '@hono/zod-validator':
         specifier: ^0.7.3
         version: 0.7.3(hono@4.9.8)(zod@3.25.76)
@@ -467,8 +467,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@google/genai@1.20.0':
-    resolution: {integrity: sha512-QdShxO9LX35jFogy3iKprQNqgKKveux4H2QjOnyIvyHRuGi6PHiz3fjNf8Y0VPY8o5V2fHqR2XqiSVoz7yZs0w==}
+  '@google/genai@1.21.0':
+    resolution: {integrity: sha512-k47DECR8BF9z7IJxQd3reKuH2eUnOH5NlJWSe+CKM6nbXx+wH3hmtWQxUQR9M8gzWW1EvFuRVgjQssEIreNZsw==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       '@modelcontextprotocol/sdk': ^1.11.4
@@ -1503,7 +1503,7 @@ snapshots:
   '@esbuild/win32-x64@0.25.4':
     optional: true
 
-  '@google/genai@1.20.0':
+  '@google/genai@1.21.0':
     dependencies:
       google-auth-library: 9.15.1
       ws: 8.18.3

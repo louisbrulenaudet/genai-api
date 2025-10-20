@@ -13,13 +13,13 @@ importers:
         version: 1.20.0
       '@hono/zod-validator':
         specifier: ^0.7.3
-        version: 0.7.3(hono@4.9.8)(zod@3.25.76)
+        version: 0.7.3(hono@4.10.1)(zod@3.25.76)
       dotenv:
         specifier: ^17.2.2
         version: 17.2.2
       hono:
-        specifier: ^4.9.8
-        version: 4.9.8
+        specifier: ^4.10.1
+        version: 4.10.1
       openai:
         specifier: ^5.22.0
         version: 5.22.0(ws@8.18.3)(zod@3.25.76)
@@ -933,8 +933,8 @@ packages:
     resolution: {integrity: sha512-pCcEwRi+TKpMlxAQObHDQ56KawURgyAf6jtIY046fJ5tIv3zDe/LEIubckAO8fj6JnAxLdmWkUfNyulQ2iKdEw==}
     engines: {node: '>=14.0.0'}
 
-  hono@4.9.8:
-    resolution: {integrity: sha512-JW8Bb4RFWD9iOKxg5PbUarBYGM99IcxFl2FPBo2gSJO11jjUDqlP1Bmfyqt8Z/dGhIQ63PMA9LdcLefXyIasyg==}
+  hono@4.10.1:
+    resolution: {integrity: sha512-rpGNOfacO4WEPClfkEt1yfl8cbu10uB1lNpiI33AKoiAHwOS8lV748JiLx4b5ozO/u4qLjIvfpFsPXdY5Qjkmg==}
     engines: {node: '>=16.9.0'}
 
   https-proxy-agent@7.0.6:
@@ -1513,9 +1513,9 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@hono/zod-validator@0.7.3(hono@4.9.8)(zod@3.25.76)':
+  '@hono/zod-validator@0.7.3(hono@4.10.1)(zod@3.25.76)':
     dependencies:
-      hono: 4.9.8
+      hono: 4.10.1
       zod: 3.25.76
 
   '@img/sharp-darwin-arm64@0.33.5':
@@ -1932,7 +1932,7 @@ snapshots:
       - encoding
       - supports-color
 
-  hono@4.9.8: {}
+  hono@4.10.1: {}
 
   https-proxy-agent@7.0.6:
     dependencies:

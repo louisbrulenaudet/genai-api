@@ -63,7 +63,7 @@
     "@hono/zod-validator": "^0.7.3",
     "dotenv": "^17.2.2",
     "hono": "^4.9.8",
-    "openai": "^5.22.0",
+    "openai": "^6.7.0",
     "zod": "^3.25.76"
   },
   "devDependencies": {

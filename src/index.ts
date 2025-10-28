@@ -11,7 +11,7 @@ import { secureHeaders } from "hono/secure-headers";
 import completionRoute from "./routes/completion";
 import healthRoute from "./routes/health";
 
-const api = new Hono()
+const api = new Hono<{ Bindings: Env }>()
 	.route("/health", healthRoute)
 	.route("/completion", completionRoute);
 

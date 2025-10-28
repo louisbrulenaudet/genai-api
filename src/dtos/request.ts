@@ -24,7 +24,7 @@ export const ContentBlock = z.union([TextContent, ImageContent]);
 export const Message = z
 	.object({
 		content: z.union([z.string().max(200000), z.array(ContentBlock)]),
-		role: z.nativeEnum(Role),
+		role: z.enum(Role),
 	})
 	.transform((msg) => {
 		let content = msg.content;
@@ -50,10 +50,10 @@ export const InferenceRequest = z
 	.object({
 		messages: Messages,
 		temperature: z.number().min(0).max(2).default(0.2).optional(),
-		provider: z.nativeEnum(Provider).default(Provider.GoogleAIStudio),
-		model: z.nativeEnum(Model).default(Model.Gemini25Flash),
+		provider: z.enum(Provider).default(Provider.GoogleAIStudio),
+		model: z.enum(Model).default(Model.Gemini25Flash),
 		reasoning_effort: z
-			.nativeEnum(ReasoningEffort)
+			.enum(ReasoningEffort)
 			.optional()
 			.default(ReasoningEffort.None),
 		accountId: z.string().optional(),

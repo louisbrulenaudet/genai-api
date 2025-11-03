@@ -67,7 +67,7 @@
     "zod": "^4.1.12"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.2.4",
+    "@biomejs/biome": "2.3.3",
     "@cloudflare/vitest-pool-workers": "^0.10.1",
     "@types/node": "^24.9.2",
     "cloc": "2.6.0-cloc",

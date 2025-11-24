@@ -64,7 +64,7 @@
     "dotenv": "^17.2.3",
     "hono": "^4.10.6",
     "openai": "^6.9.0",
-    "zod": "^4.1.12"
+    "zod": "^4.1.13"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.4",

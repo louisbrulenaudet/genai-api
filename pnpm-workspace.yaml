@@ -1,4 +1,6 @@
 packages:
   - ./
+
 ignoredBuiltDependencies:
+  - esbuild
   - workerd

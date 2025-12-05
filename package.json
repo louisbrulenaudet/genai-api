@@ -59,21 +59,21 @@
     "types": "wrangler types"
   },
   "dependencies": {
-    "@google/genai": "^1.29.1",
-    "@hono/zod-validator": "^0.7.4",
+    "@google/genai": "^1.31.0",
+    "@hono/zod-validator": "^0.7.5",
     "dotenv": "^17.2.3",
-    "hono": "^4.10.6",
-    "openai": "^6.9.0",
-    "zod": "^4.1.12"
+    "hono": "^4.10.7",
+    "openai": "^6.10.0",
+    "zod": "^4.1.13"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.4",
-    "@cloudflare/vitest-pool-workers": "^0.10.7",
+    "@cloudflare/vitest-pool-workers": "^0.10.14",
     "@types/node": "^24.10.1",
     "cloc": "2.6.0-cloc",
     "typescript": "5.9.2",
     "vitest": "~3.2.4",
-    "wrangler": "^4.47.0"
+    "wrangler": "^4.53.0"
   },
   "packageManager": "pnpm@10.16.1",
   "engines": {

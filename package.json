@@ -72,7 +72,7 @@
     "@types/node": "^24.10.1",
     "cloc": "2.6.0-cloc",
     "typescript": "5.9.2",
-    "vitest": "~3.2.4",
+    "vitest": "~4.0.15",
     "wrangler": "^4.53.0"
   },
   "packageManager": "pnpm@10.16.1",

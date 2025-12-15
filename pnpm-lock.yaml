@@ -13,7 +13,7 @@ importers:
         version: 1.31.0
       '@hono/zod-validator':
         specifier: ^0.7.5
-        version: 0.7.5(hono@4.10.7)(zod@4.1.13)
+        version: 0.7.5(hono@4.10.7)(zod@4.2.0)
       dotenv:
         specifier: ^17.2.3
         version: 17.2.3
@@ -22,10 +22,10 @@ importers:
         version: 4.10.7
       openai:
         specifier: ^6.10.0
-        version: 6.10.0(ws@8.18.3)(zod@4.1.13)
+        version: 6.10.0(ws@8.18.3)(zod@4.2.0)
       zod:
-        specifier: ^4.1.13
-        version: 4.1.13
+        specifier: ^4.2.0
+        version: 4.2.0
     devDependencies:
       '@biomejs/biome':
         specifier: 2.2.4
@@ -1383,8 +1383,8 @@ packages:
   zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
 
-  zod@4.1.13:
-    resolution: {integrity: sha512-AvvthqfqrAhNH9dnfmrfKzX5upOdjUVJYFqNSlkmGf64gRaTzlPwz99IHYnVs28qYAybvAlBV+H7pn0saFY4Ig==}
+  zod@4.2.0:
+    resolution: {integrity: sha512-Bd5fw9wlIhtqCCxotZgdTOMwGm1a0u75wARVEY9HMs1X17trvA/lMi4+MGK5EUfYkXVTbX8UDiDKW4OgzHVUZw==}
 
 snapshots:
 
@@ -1639,10 +1639,10 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@hono/zod-validator@0.7.5(hono@4.10.7)(zod@4.1.13)':
+  '@hono/zod-validator@0.7.5(hono@4.10.7)(zod@4.2.0)':
     dependencies:
       hono: 4.10.7
-      zod: 4.1.13
+      zod: 4.2.0
 
   '@img/sharp-darwin-arm64@0.33.5':
     optionalDependencies:
@@ -2203,10 +2203,10 @@ snapshots:
       fetch-blob: 3.2.0
       formdata-polyfill: 4.0.10
 
-  openai@6.10.0(ws@8.18.3)(zod@4.1.13):
+  openai@6.10.0(ws@8.18.3)(zod@4.2.0):
     optionalDependencies:
       ws: 8.18.3
-      zod: 4.1.13
+      zod: 4.2.0
 
   package-json-from-dist@1.0.1: {}
 
@@ -2513,4 +2513,4 @@ snapshots:
 
   zod@3.25.76: {}
 
-  zod@4.1.13: {}
+  zod@4.2.0: {}

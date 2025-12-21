@@ -1,3 +1,3 @@
 // src/clients/index.ts
 
-export * from "./googleGenAIClient";
+export * from "./google-gen-ai-client";

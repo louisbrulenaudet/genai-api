@@ -1,12 +1,24 @@
 {
-  "biome.organizeImports": true,
-  "editor.formatOnSave": true,
+  "makefile.configureOnOpen": false,
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/.turbo": true
+  },
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports.biome": "explicit"
+  },
+  "[javascript][javascriptreact][typescript][typescriptreact][json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
   "cSpell.words": [
     "Brulé",
     "cloc",
     "cloudflare",
     "dotenv",
     "dtos",
+    "Filenaming",
+    "gemini",
     "genai",
     "Hono",
     "multimodal",

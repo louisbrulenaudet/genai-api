@@ -1,7 +1,7 @@
 // src/enums/timeout.ts
 
 export enum Timeout {
-	Short = 10000,
-	Medium = 50000,
-	Long = 120000,
+  SHORT = 10000,
+  MEDIUM = 50000,
+  LONG = 120000,
 }

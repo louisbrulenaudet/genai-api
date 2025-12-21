@@ -1,15 +1,15 @@
 <p align="center">
-  <img src="assets/thumbnail.png" alt="Bodyboard Thumbnail" height="150" />
+  <img src="assets/thumbnail.png" alt="Bodyboard Thumbnail" height="150" draggable="false" />
 </p>
 
-# Supercharge Apple's Shortcuts using Cloudflare Worker and Gemini within minutes ☁️✨
+# Supercharge your applications using Cloudflare Worker and Gemini within minutes ☁️✨
 
 [![Biome](https://img.shields.io/badge/lint-biome-blue?logo=biome)](https://biomejs.dev/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
 [![Known Vulnerabilities](https://snyk.io/test/github/louisbrulenaudet/genai-api/badge.svg)](https://snyk.io/test/github/louisbrulenaudet/genai-api)
 [![Zod](https://img.shields.io/badge/validation-zod-blueviolet?logo=zod)](https://github.com/colinhacks/zod)
 
-This TypeScript API built with [Hono](https://hono.dev/), [OpenAI](https://openai.com/), and deployed as a Cloudflare Worker aims to boost the performance of Apple's Shortcuts by providing a seamless integration with generative AI capabilities, allowing users to create more powerful and intelligent shortcuts and leveraging the full potential of information extraction provided by the Apple ecosystem.
+This TypeScript API built with [Hono](https://hono.dev/), [OpenAI](https://openai.com/), and deployed as a Cloudflare Worker aims originally to boost the performance of Apple's Shortcuts by providing a seamless integration with generative AI capabilities, allowing users to create more powerful and intelligent shortcuts and leveraging the full potential of information extraction provided by the Apple ecosystem. Nowadays, it can now be used to supercharge any application by providing a seamless integration with generative AI capabilities.
 
 The objective of this repo is to provide a very simple and easy-to-use API for developers to integrate generative AI capabilities into their shortcuts in a minute. You just have to download this repository, slightly edit the configuration files, notably the `wrangler.jsonc` file, and run `make init` (eventually `make update`), then:
 

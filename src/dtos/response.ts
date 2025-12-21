@@ -2,13 +2,13 @@
 
 import { z } from "zod";
 
-export const HealthResponse = z.object({
-	status: z.literal("API successfully started ☁️"),
+export const HealthResponseSchema = z.object({
+  status: z.literal("API successfully started ☁️"),
 });
 
-export const InferenceResponse = z.object({
-	content: z.string(),
+export const InferenceResponseSchema = z.object({
+  content: z.string(),
 });
 
-export type HealthResponseType = z.infer<typeof HealthResponse>;
-export type InferenceResponseType = z.infer<typeof InferenceResponse>;
+export type HealthResponse = z.infer<typeof HealthResponseSchema>;
+export type InferenceResponse = z.infer<typeof InferenceResponseSchema>;

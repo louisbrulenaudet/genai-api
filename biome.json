@@ -1,0 +1,132 @@
+{
+    "vcs": {
+        "enabled": true,
+        "clientKind": "git",
+        "useIgnoreFile": true,
+        "defaultBranch": "main"
+    },
+    "files": {
+        "ignoreUnknown": true,
+        "includes": [
+            "**",
+            "!**/worker-configuration.d.ts",
+            "!!node_modules",
+            "!!dist",
+            "!!.turbo",
+            "!!build",
+            "!.wrangler"
+        ]
+    },
+    "formatter": {
+        "enabled": true,
+        "indentStyle": "space",
+        "indentWidth": 2,
+        "lineWidth": 80,
+        "lineEnding": "lf"
+    },
+    "linter": {
+        "enabled": true,
+        "rules": {
+            "recommended": true,
+            "style": {
+                "useBlockStatements": "error",
+                "noParameterProperties": "error",
+                "useFilenamingConvention": {
+                    "level": "error",
+                    "options": {
+                        "strictCase": true,
+                        "requireAscii": true,
+                        "filenameCases": [
+                            "kebab-case"
+                        ]
+                    }
+                }
+            },
+            "complexity": {
+                "noExcessiveLinesPerFunction": {
+                    "level": "error",
+                    "options": {
+                        "maxLines": 100,
+                        "skipBlankLines": true,
+                        "skipIifes": false
+                    }
+                }
+            },
+            "correctness": {
+                "noUnusedVariables": "error",
+                "noUnusedImports": "error"
+            },
+            "suspicious": {
+                "noExplicitAny": "warn",
+                "noArrayIndexKey": "error"
+            }
+        }
+    },
+    "assist": {
+        "enabled": true,
+        "actions": {
+            "source": {
+                "recommended": true
+            }
+        }
+    },
+    "javascript": {
+        "formatter": {
+            "quoteStyle": "double",
+            "semicolons": "always",
+            "trailingCommas": "all",
+            "arrowParentheses": "always"
+        }
+    },
+    "json": {
+        "parser": {
+            "allowComments": true,
+            "allowTrailingCommas": true
+        }
+    },
+    "overrides": [
+        {
+            "includes": [
+                "**/*.jsonc",
+                "**/wrangler.jsonc"
+            ],
+            "json": {
+                "parser": {
+                    "allowComments": true,
+                    "allowTrailingCommas": true
+                }
+            }
+        },
+        {
+            "includes": [
+                "**/drizzle/migrations/**"
+            ],
+            "formatter": {
+                "enabled": false
+            },
+            "linter": {
+                "enabled": false
+            }
+        },
+        {
+            "includes": [
+                "**/*.test.ts",
+                "**/*.spec.ts",
+                "tests/**/*"
+            ],
+            "linter": {
+                "rules": {
+                    "style": {
+                        "noNonNullAssertion": "off"
+                    },
+                    "suspicious": {
+                        "noExplicitAny": "off"
+                    },
+                    "complexity": {
+                        "noExcessiveCognitiveComplexity": "off"
+                    }
+                }
+            }
+        }
+    ]
+}

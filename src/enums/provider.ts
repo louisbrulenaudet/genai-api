@@ -1,5 +1,5 @@
 // src/enums/provider.ts
 
 export enum Provider {
-	GoogleAIStudio = "google-ai-studio",
+  GOOGLE_AI_STUDIO = "google-ai-studio",
 }

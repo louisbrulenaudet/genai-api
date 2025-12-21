@@ -3,12 +3,12 @@
 import "hono";
 
 declare module "hono" {
-	interface ContextVariableMap {
-		AIProvider: {
-			apiKey: string;
-			model: string;
-			baseURL: string;
-			provider: string;
-		};
-	}
+  interface ContextVariableMap {
+    AIProvider: {
+      apiKey: string;
+      model: string;
+      baseURL: string;
+      provider: string;
+    };
+  }
 }

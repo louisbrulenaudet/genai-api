@@ -1,5 +1,5 @@
 // src/types/index.ts
 
-export * from "./completionContext";
+export * from "./completion-context";
 export * from "./inference";
 export * from "./retry";

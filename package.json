@@ -74,7 +74,7 @@
     "@types/node": "^25.0.3",
     "cloc": "2.6.0-cloc",
     "typescript": "^5.9.3",
-    "wrangler": "^4.56.0"
+    "wrangler": "^4.58.0"
   },
   "packageManager": "pnpm@10.26.2",
   "engines": {

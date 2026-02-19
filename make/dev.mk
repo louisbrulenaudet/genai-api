@@ -1,4 +1,4 @@
-init: ## Initialize the project
+install: ## Initialize the project
 	@echo "🔧 Initializing the project..."
 	pnpm install
 
@@ -14,6 +14,11 @@ dev: ## Run development server with hot reloading and local database
 	@echo "💻 Starting development server..."
 	pnpm run dev
 
+login: ## Login to Cloudflare
+	@echo "🔑 Logging in to Cloudflare..."
+	pnpm wrangler login
+	@echo "✅ Cloudflare logged in"
+	
 deploy: ## Deploy the application globally
 	@echo "🚀 Deploying to global network..."
 	pnpm run deploy

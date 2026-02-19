@@ -2,24 +2,42 @@ name: CI
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches:
+      - '**'
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   check:
+    name: Lint and check codebase
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: read
-      actions: read
-      checks: write
+    strategy:
+      matrix:
+        node-version: [22]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-      - run: make init
-      - run: make check
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: make install-frozen
+
+      - name: Lint and format
+        run: make check
+
+      - name: Build
+        run: make build

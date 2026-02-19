@@ -1,5 +1,7 @@
 on:
   push:
+    branches:
+      - '**'
 
 name: Secret Leaks
 

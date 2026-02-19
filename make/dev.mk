@@ -2,6 +2,10 @@ install: ## Initialize the project
 	@echo "🔧 Initializing the project..."
 	pnpm install
 
+install-frozen: ## Initialize the project and install dependencies with frozen lockfile for CI/CD
+	@echo "🔧 Initializing the project..."
+	pnpm install --recursive --frozen-lockfile
+
 update: ## Update dependencies to their latest versions
 	@echo "🔄 Updating dependencies..."
 	pnpm update
@@ -18,7 +22,7 @@ login: ## Login to Cloudflare
 	@echo "🔑 Logging in to Cloudflare..."
 	pnpm wrangler login
 	@echo "✅ Cloudflare logged in"
-	
+
 deploy: ## Deploy the application globally
 	@echo "🚀 Deploying to global network..."
 	pnpm run deploy
